@@ -1,8 +1,8 @@
-import constants
 from django.db import IntegrityError
 from django.test import TestCase
 
-from scopes.models import Context, Scope
+from knoxth import constants
+from knoxth.models import Context, Scope
 
 
 # Create your tests here.
