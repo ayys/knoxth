@@ -25,10 +25,14 @@ class Scope(models.Model):
     def add_perm(self, perm):
         if perm in [ACCESS, MODIFY, DELETE]:
             self.permissions = self.permissions | perm
+            self.save()
         return self.permissions
 
 
     def del_perm(self, perm):
+        if perm in [ACCESS, MODIFY, DELETE]:
+            self.permissions = self.permissions & ~perm
+            self.save()
         return self.permissions
 
     def __str__(self):
