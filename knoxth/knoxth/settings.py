@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'claim',
-    'scopes'
+    'scopes',
     'rest_framework',
     'rest_framework.authtoken',
     'knox',
