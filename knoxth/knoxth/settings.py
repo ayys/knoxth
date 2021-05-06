@@ -39,6 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'claim',
     'scopes'
+    'rest_framework',
+    'rest_framework.authtoken',
+    'knox',
+    'django_extensions'
 ]
 
 MIDDLEWARE = [
