@@ -16,8 +16,7 @@ class Context(models.Model):
 class Scope(models.Model):
     context = models.ForeignKey(
         Context,
-        on_delete=models.CASCADE,
-        null=True)
+        on_delete=models.CASCADE)
 
     permissions = models.IntegerField(
         choices=[("ACCESS", ACCESS),
