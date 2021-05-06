@@ -1,7 +1,8 @@
+import constants
 from django.db import IntegrityError
 from django.test import TestCase
 
-from scopes.models import Context
+from scopes.models import Context, Scope
 
 
 # Create your tests here.
@@ -13,6 +14,14 @@ class ContextTestCase(TestCase):
     def test_context_exists(self):
         count = Context.objects.all().count()
         self.assertEqual(count, 2)
+
+    def test_context_name_is_None(self):
+        with self.assertRaises(IntegrityError):
+            Context.objects.create(name=None)
+
+    def test_context_name_is_unspecified(self):
+        with self.assertRaises(IntegrityError):
+            Context.objects.create()
 
     def test_context_name_is_unique(self):
         with self.assertRaises(IntegrityError):
