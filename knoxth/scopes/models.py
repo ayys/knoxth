@@ -1,3 +1,4 @@
+from constants import ACCESS, ALL_PERMISSIONS, DELETE, MODIFY
 from django.db import models
 
 
@@ -19,7 +20,7 @@ class Scope(models.Model):
         choices=[("ACCESS", ACCESS),
                  ("MODIFY", MODIFY),
                  ("DELETE", DELETE)],
-        default=ACCESS | MODIFY | DELETE)
+        default=ALL_PERMISSIONS)
 
     def add_perm(self, perm):
         if perm in [ACCESS, MODIFY, DELETE]:
