@@ -1,0 +1,20 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[dev-packages]
+flake8 = "*"
+pylint = "*"
+pylint-django = "*"
+django-extensions= "*"
+Werkzeug = "*"
+ipython = "*"
+
+[packages]
+django = "*"
+djangorestframework = "*"
+django-rest-knox = "*"
+
+[requires]
+python_version = "3.9"
