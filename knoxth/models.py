@@ -1,3 +1,3 @@
-from knoxth.mod.claim import Claim
-from knoxth.mod.context import Context
-from knoxth.mod.scope import Scope
+from knoxth.mods.claim import Claim
+from knoxth.mods.context import Context
+from knoxth.mods.scope import Scope
