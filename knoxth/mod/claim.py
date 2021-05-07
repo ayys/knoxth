@@ -29,9 +29,11 @@ class Claim(models.Model):
 
     def verify(self, context, permission):
         return len(
-            [_.permissions & permission
-             for _ in Scope.objects.filter(context__name=context)
-             if _.permissions & permission != 0]) > 0
+            [
+                1
+                for _ in self.scopes.filter(context__name=context)
+                if _.permissions & permission != 0
+             ]) > 0
 
     def __str__(self):
         return f"Token {self.token.digest[:5]}... has {[_ for _ in self.scopes.all()]} scopes"
