@@ -56,5 +56,5 @@ def withContext(_class=None, context=None):
                 SWSIsScoped.context = _context_name
                 self.permission_classes.append(SWSIsScoped)
                 Context.objects.get_or_create(name=_context_name)
-        return _Decorated
-    return _withContext(_class) if callable(_class)else _withContext
+        return __Decorated
+    return __withContext(_class) if callable(_class)else _withContext
