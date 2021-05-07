@@ -1,3 +1,10 @@
+'''
+Views for knoxth
+
+from knoxth.views import ContextViewSet
+from knxoth.views import KnoxthLoginView
+'''
+
 from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -30,6 +37,9 @@ class KnoxthLoginView(KnoxLoginView):
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
+    '''
+    Create a DRF Token everytime the user object is updated.
+    '''
     try:
         instance.token.delete()
     except: pass

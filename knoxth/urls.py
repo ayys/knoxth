@@ -1,3 +1,21 @@
+'''
+There are a total of four rest endpoints exposed by knxoth,
+which you may use to implement auth-code based authorization
+for your app.
+
+LOGIN FLOW:
+
+POST authorize/ with username and password in body
+POST login/ with the auth-code from previus step
+
+
+LOGOUT FLOW:
+GET logout/
+
+LOGOUT FROM ALL DEVICES:
+GET logoutall/
+'''
+
 from django.contrib.auth import views
 from django.urls import include, path
 from knox import views as knox_views

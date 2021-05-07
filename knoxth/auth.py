@@ -1,3 +1,8 @@
+'''
+contains IsScoped which is a permission class that uses scopes
+assigned to knox tokens for authorization
+'''
+
 from django.core.exceptions import ObjectDoesNotExist
 from knox.models import AuthToken
 from knox.settings import CONSTANTS
@@ -14,6 +19,12 @@ class IsScoped(BasePermission):
     or is a read-only request.
     """
     def has_permission(self, request, view):
+        '''
+        this method is called to check if the request has
+        necessary permissions to authorize access.
+        It checks if the current token claim can be used to
+        verify the scope permission for requested context
+        '''
         auth_token = self.get_auth_token(request)
         print(ACCESS, IsScoped.context,
               auth_token.claim,
@@ -29,6 +40,9 @@ class IsScoped(BasePermission):
         )
 
     def get_auth_token(self, request):
+        '''
+        Returns the Knox AuthToken object for given request.
+        '''
         auth = get_authorization_header(request).split()
         if len(auth) == 2:
             token = auth[1].decode("UTF-8")

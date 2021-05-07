@@ -1,4 +1,11 @@
+'''
+Claim Model for knoxth.
+
+from knoxth.models import Claim
+'''
+
 from django.db import models
+from django.db.models import QuerySet
 from knox.models import AuthToken as KnoxToken
 from knoxth.constants import ACCESS, DELETE, MODIFY
 from knoxth.mod.context import Context
@@ -14,20 +21,37 @@ class Claim(models.Model):
     token = models.OneToOneField(KnoxToken, on_delete=models.CASCADE)
     scopes = models.ManyToManyField(Scope)
 
-    def add_scope(self, context, permissions):
+    def add_scope(self, context: str, permissions: int) -> tuple[QuerySet[Scope], bool]:
+        '''
+        Adds a scope with given context and permissions
+
+        The permissions need to be bitwise-ORed as such:
+        ACCESS | MODIFY | DELETE
+
+        context has to be a string.
+        '''
         return self.scopes.get_or_create(
             context=Context.objects.get_or_create(name=context)[0],
             permissions=permissions)[0]
 
-    def del_scope(self, context, permissions=ACCESS|MODIFY|DELETE):
+    def del_scope(self, context: str, permissions: int=ACCESS|MODIFY|DELETE) -> QuerySet[Scope]:
+        '''
+        Delete a scope with the given context and permissions. If scopes don't match, do nothing.
+        '''
         return self.scopes.filter(
             context__name=context,
             permissions=permissions).delete()
 
-    def del_scope_with_context(self, context):
+    def del_scopes_with_context(self, context: str) -> QuerySet[Scope]:
+        '''
+        Delete all scopes with the given context.
+        '''
         return self.scopes.filter(context__name=context).delete()
 
-    def verify(self, context, permission):
+    def verify(self, context: str, permission: int) -> bool:
+        '''
+        Verifies that the claim accepts given permissions for the given context.
+        '''
         return len(
             [
                 1
