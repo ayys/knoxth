@@ -6,7 +6,7 @@ from knoxth.models import Scope
 
 from django.db import models
 from knoxth.constants import ACCESS, ALL_PERMISSIONS, DELETE, MODIFY
-from knoxth.mod.context import Context
+from knoxth.mods.context import Context
 
 
 class Scope(models.Model):

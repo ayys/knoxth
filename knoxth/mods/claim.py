@@ -8,8 +8,8 @@ from django.db import models
 from django.db.models import QuerySet
 from knox.models import AuthToken as KnoxToken
 from knoxth.constants import ACCESS, DELETE, MODIFY
-from knoxth.mod.context import Context
-from knoxth.mod.scope import Scope
+from knoxth.mods.context import Context
+from knoxth.mods.scope import Scope
 
 
 # Create your models here.
