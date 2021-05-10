@@ -21,7 +21,7 @@ class Claim(models.Model):
     token = models.OneToOneField(KnoxToken, on_delete=models.CASCADE)
     scopes = models.ManyToManyField(Scope)
 
-    def add_scope(self, context: str, permissions: int) -> tuple[QuerySet[Scope], bool]:
+    def add_scope(self, context: str, permissions: int):
         '''
         Adds a scope with given context and permissions
 
@@ -34,7 +34,7 @@ class Claim(models.Model):
             context=Context.objects.get_or_create(name=context)[0],
             permissions=permissions)[0]
 
-    def del_scope(self, context: str, permissions: int=ACCESS|MODIFY|DELETE) -> QuerySet[Scope]:
+    def del_scope(self, context: str, permissions: int=ACCESS|MODIFY|DELETE):
         '''
         Delete a scope with the given context and permissions. If scopes don't match, do nothing.
         '''
@@ -42,7 +42,7 @@ class Claim(models.Model):
             context__name=context,
             permissions=permissions).delete()
 
-    def del_scopes_with_context(self, context: str) -> QuerySet[Scope]:
+    def del_scopes_with_context(self, context: str):
         '''
         Delete all scopes with the given context.
         '''
