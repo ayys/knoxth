@@ -10,6 +10,10 @@ pylint-django = "*"
 django-extensions= "*"
 Werkzeug = "*"
 ipython = "*"
+mkdocs = "*"
+mkdocstrings = "*"
+mkdocs-custommill = "*"
+tox = "*"
 
 [packages]
 django = "*"
