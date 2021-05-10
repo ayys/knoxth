@@ -1,0 +1,30 @@
+image: python:latest
+
+cache:
+  paths:
+    - ~/.cache/pip/
+
+stages:
+  - lint
+  - unittest
+
+before_script:
+  - python -V  # Print out python version for debugging
+  - pipenv install --dev
+
+test-flake8:
+  stage: lint
+  script:
+    - flake8 knoxth
+
+test-flake8:
+  stage: lint
+  script:
+    - isort --check-only --diff knoxth setup.py tests
+
+test-tox:
+  stage: unittest
+  image: themattrix/tox
+  script:
+    - cd tests/tests
+    - pipenv run tox
