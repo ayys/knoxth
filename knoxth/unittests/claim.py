@@ -47,7 +47,7 @@ class ClaimTestCase(TestCase):
         claim.add_scope("First Context", constants.ACCESS | constants.MODIFY)
         claim.add_scope("Second Context", constants.ACCESS | constants.MODIFY)
         prev_scope_count = claim.scopes.all().count()
-        claim.del_scope_with_context("Second Context")
+        claim.del_scopes_with_context("Second Context")
         final_scope_count = claim.scopes.all().count()
         self.assertEqual(final_scope_count, prev_scope_count - 1)
 
@@ -56,7 +56,7 @@ class ClaimTestCase(TestCase):
         claim.add_scope("First Context", constants.ACCESS | constants.MODIFY)
         claim.add_scope("Second Context", constants.ACCESS | constants.MODIFY)
         prev_scope_count = claim.scopes.all().count()
-        claim.del_scope_with_context("Third Context")
+        claim.del_scopes_with_context("Third Context")
         final_scope_count = claim.scopes.all().count()
         self.assertEqual(final_scope_count, prev_scope_count)
 
