@@ -3,6 +3,7 @@ Claim Model for knoxth.
 
 from knoxth.models import Claim
 '''
+from typing import Iterable, Tuple
 
 from django.db import models
 from django.db.models import QuerySet
