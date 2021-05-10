@@ -10,22 +10,21 @@ stages:
 
 before_script:
   - python -V  # Print out python version for debugging
-  - pip install pipenv
-  - pipenv install --dev
+  - pip install flake8 isort tox
 
 test-flake8:
   stage: lint
   script:
-    - pipenv run flake8 knoxth
+    - flake8 knoxth
 
 test-isort:
   stage: lint
   script:
-    - pipenv run isort --check-only --diff knoxth setup.py
+    - isort --check-only --diff knoxth setup.py
 
 test-tox:
   stage: unittest
   image: themattrix/tox
   script:
     - cd tests/tests
-    - pipenv run tox
+    - tox
