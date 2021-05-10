@@ -1,0 +1,20 @@
+site_name: Knoxth Documentation
+repo_url: https://github.com/ayys/knoxth
+
+nav:
+  - Home: 'index.md'
+  - Installation: 'installation.md'
+  - Getting Started: 'getting-started.md'
+  - API Guide:
+      - Permissions: 'perms.md'
+      - Decorators: 'decorators.md'
+
+plugins:
+  - mkdocstrings:
+      handlers:
+        python:
+          setup_commands:
+            - import os
+            - import django
+            - os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tests.settings")
+            - django.setup()
