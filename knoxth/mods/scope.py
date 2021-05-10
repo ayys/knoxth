@@ -5,6 +5,7 @@ from knoxth.models import Scope
 '''
 
 from django.db import models
+
 from knoxth.constants import ACCESS, ALL_PERMISSIONS, DELETE, MODIFY
 from knoxth.mods.context import Context
 

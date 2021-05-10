@@ -10,8 +10,9 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from knox.views import LoginView as KnoxLoginView
 from rest_framework import viewsets
-from rest_framework.authentication import \
-    TokenAuthentication as DRFTokenAuthentication
+from rest_framework.authentication import (
+    TokenAuthentication as DRFTokenAuthentication,
+)
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
 

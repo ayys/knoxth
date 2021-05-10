@@ -8,6 +8,7 @@ from typing import Iterable, Tuple
 from django.db import models
 from django.db.models import QuerySet
 from knox.models import AuthToken as KnoxToken
+
 from knoxth.constants import ACCESS, DELETE, MODIFY
 from knoxth.mods.context import Context
 from knoxth.mods.scope import Scope
