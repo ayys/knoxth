@@ -10,16 +10,17 @@ stages:
 
 before_script:
   - python -V  # Print out python version for debugging
-  - pip install flake8 isort tox
 
 test-flake8:
   stage: lint
   script:
+    - pip install flake8
     - flake8 knoxth
 
 test-isort:
   stage: lint
   script:
+    - pip install isort
     - isort --check-only --diff knoxth setup.py
 
 test-tox:
@@ -27,4 +28,5 @@ test-tox:
   image: themattrix/tox
   script:
     - cd tests/tests
+    - pip install tox
     - tox
