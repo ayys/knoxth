@@ -15,12 +15,12 @@ before_script:
 test-flake8:
   stage: lint
   script:
-    - flake8 knoxth
+    - pipenv run flake8 knoxth
 
 test-flake8:
   stage: lint
   script:
-    - isort --check-only --diff knoxth setup.py tests
+    - pipenv run isort --check-only --diff knoxth setup.py tests
 
 test-tox:
   stage: unittest
