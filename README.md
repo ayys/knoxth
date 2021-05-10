@@ -10,14 +10,15 @@
 
 <p align="center">
   <a href="https://saythanks.io/to/ayushjha@pm.me"><img src="https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg"/></a>
- <a href="https://gitlab.com/ayys/knoxth/-/commits/master"><img alt="pipeline status" src="https://gitlab.com/ayys/knoxth/badges/master/pipeline.svg" /></a> 
+ <a href="https://gitlab.com/ayys/knoxth/-/commits/master"><img alt="pipeline status" src="https://gitlab.com/ayys/knoxth/badges/master/pipeline.svg" /></a>
    <a href="https://github.com/ayys/knoxth/blob/master/LICENSE"><img alt="GitHub" src="https://img.shields.io/github/license/ayys/knoxth"></a>
- <a href="https://gitlab.com/ayys/knoxth/-/commits/master"><img alt="coverage report" src="https://gitlab.com/ayys/knoxth/badges/master/coverage.svg" /></a> 
+ <a href="https://gitlab.com/ayys/knoxth/-/commits/master"><img alt="coverage report" src="https://gitlab.com/ayys/knoxth/badges/master/coverage.svg" /></a>
 </p>
 
 <p align="center">
   <a href="#key-features">Key Features</a> •
-  <a href="#how-to-use">How To Use</a> •
+  <a href="https://ayys.gitlab.io/knoxth/getting-started/">How To Use</a> •
+  <a href="https://ayys.gitlab.io/knoxth/">Documentation</a> •
   <a href="#license">License</a>
 </p>
 
