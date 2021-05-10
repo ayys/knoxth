@@ -16,6 +16,7 @@ mkdocstrings = "*"
 mkdocs-custommill = "*"
 tox = "*"
 autoflake = "*"
+coverage = "*"
 
 [packages]
 django = "*"
