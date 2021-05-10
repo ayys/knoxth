@@ -8,7 +8,6 @@ This decorator does two things:
 2. Injects IsScoped in permission_classes for the view/viewset
 """
 
-import inspect
 from functools import wraps
 
 from knoxth.auth import IsScoped

@@ -11,7 +11,7 @@ from knoxth.mods.context import Context
 
 
 class Scope(models.Model):
-    '''
+    """
     A scope stores permissions for a specific context.
     Scope enables users to control the authorization
     for each context independently.
@@ -22,7 +22,7 @@ class Scope(models.Model):
 
     del_perm(perm) ->  deletes a permission from this scope
 
-    '''
+    """
     context = models.ForeignKey(
         Context,
         on_delete=models.CASCADE)
@@ -34,19 +34,18 @@ class Scope(models.Model):
         default=ALL_PERMISSIONS)
 
     def add_perm(self, perm: int) -> int:
-        '''
+        """
         Adds a permission to this scope and returns the current permissions.
-        '''
+        """
         if perm in [ACCESS, MODIFY, DELETE]:
             self.permissions = self.permissions | perm
             self.save()
         return self.permissions
 
-
     def del_perm(self, perm: int) -> int:
-        '''
+        """
         Deletes a permission from this scope and returns the current permissions.
-        '''
+        """
         if perm in [ACCESS, MODIFY, DELETE]:
             self.permissions = self.permissions & ~perm
             self.save()

@@ -16,7 +16,6 @@ LOGOUT FROM ALL DEVICES:
 GET logoutall/
 """
 
-from django.contrib.auth import views
 from django.urls import include, path
 from knox import views as knox_views
 from rest_framework import routers

@@ -1,4 +1,4 @@
 [flake8]
-max-line-length = 90
+max-line-length = 100
 max-complexity = 10
-exclude = *migrations* *unittests* *tests.py
+exclude = *migrations* *unittests* *tests.py knoxth/models.py
