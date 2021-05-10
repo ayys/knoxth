@@ -302,6 +302,4 @@ Great, that was easy!
 If you want to get a more in depth understanding of how REST framework fits together head on over to [the tutorial][tutorial], or start browsing the [API guide][guide].
 
 [cat-dog-overall]: ./cat-dog-endpoint.png
-[tutorial]: 1-serialization.md
-[guide]: ../api-guide/requests.md
 [httpie]: https://github.com/jakubroztocil/httpie#installation
