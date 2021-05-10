@@ -21,7 +21,7 @@ test-flake8:
 test-isort:
   stage: lint
   script:
-    - pipenv run isort --check-only --diff knoxth setup.py tests
+    - pipenv run isort --check-only --diff knoxth setup.py
 
 test-tox:
   stage: unittest
