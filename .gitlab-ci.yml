@@ -7,6 +7,7 @@ cache:
 stages:
   - lint
   - unittest
+  - deploy-docs
 
 before_script:
   - python -V  # Print out python version for debugging
@@ -30,3 +31,20 @@ test-tox:
     - cd tests/tests
     - pip install tox
     - tox
+    - mv coverage ../../
+    - cd ../../
+  artifacts:
+    paths:
+      - coverage/
+
+pages:
+  stage: deploy-docs
+  script:
+  - pip install mkdocs
+  - mkdocs build --strict --verbose -d public
+  - mv coverage public/
+  artifacts:
+    paths:
+    - public
+  only:
+  - master
