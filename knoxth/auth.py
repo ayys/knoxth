@@ -1,7 +1,7 @@
-'''
+"""
 contains IsScoped which is a permission class that uses scopes
 assigned to knox tokens for authorization
-'''
+"""
 
 from django.core.exceptions import ObjectDoesNotExist
 from knox.models import AuthToken
@@ -18,35 +18,47 @@ class IsScoped(BasePermission):
     The request is authorized based on token,
     or is a read-only request.
     """
+
     def has_permission(self, request, view):
-        '''
+        """
         this method is called to check if the request has
         necessary permissions to authorize access.
         It checks if the current token claim can be used to
         verify the scope permission for requested context
-        '''
+        """
         auth_token = self.get_auth_token(request)
-        print(ACCESS, IsScoped.context,
-              auth_token.claim,
-              auth_token.claim.verify(IsScoped.context, ACCESS))
+        print(
+            ACCESS,
+            IsScoped.context,
+            auth_token.claim,
+            auth_token.claim.verify(IsScoped.context, ACCESS),
+        )
         return bool(
-            auth_token and
-            ((request.method in SAFE_METHODS and
-              auth_token.claim.verify(IsScoped.context, ACCESS)) or
-             ((request.method == 'POST') and
-              auth_token.claim.verify(IsScoped.context, MODIFY)) or
-             ((request.method == 'DELETE') and
-              auth_token.claim.verify(IsScoped.context, DELETE)))
+            auth_token
+            and (
+                (
+                    request.method in SAFE_METHODS
+                    and auth_token.claim.verify(IsScoped.context, ACCESS)
+                )
+                or (
+                    (request.method == "POST")
+                    and auth_token.claim.verify(IsScoped.context, MODIFY)
+                )
+                or (
+                    (request.method == "DELETE")
+                    and auth_token.claim.verify(IsScoped.context, DELETE)
+                )
+            )
         )
 
     def get_auth_token(self, request):
-        '''
+        """
         Returns the Knox AuthToken object for given request.
-        '''
+        """
         auth = get_authorization_header(request).split()
         if len(auth) == 2:
             token = auth[1].decode("UTF-8")
-            token_key = token[:CONSTANTS.TOKEN_KEY_LENGTH]
+            token_key = token[: CONSTANTS.TOKEN_KEY_LENGTH]
             authtoken = AuthToken.objects.get(token_key=str(token_key))
             try:
                 # try to access the token claim

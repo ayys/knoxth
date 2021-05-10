@@ -2,5 +2,5 @@ from django.apps import AppConfig
 
 
 class ScopesConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'knoxth'
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "knoxth"

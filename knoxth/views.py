@@ -1,9 +1,9 @@
-'''
+"""
 Views for knoxth
 
 from knoxth.views import ContextViewSet
 from knxoth.views import KnoxthLoginView
-'''
+"""
 
 from django.conf import settings
 from django.db.models.signals import post_save
@@ -24,24 +24,28 @@ class ContextViewSet(viewsets.ReadOnlyModelViewSet):
     """
     A simple ViewSet for viewing accounts.
     """
+
     queryset = Context.objects.all()
     serializer_class = ContextSerializer
     permission_classes = [IsAuthenticated]
 
 
 class KnoxthLoginView(KnoxLoginView):
-    '''
+    """
     The Login view has to be authenticated with the authorization code
     acquired via DRF.
-    '''
+    """
+
     authentication_classes = [DRFTokenAuthentication]
+
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
-    '''
+    """
     Create a DRF Token everytime the user object is updated.
-    '''
+    """
     try:
         instance.token.delete()
-    except: pass
+    except Exception:
+        ...
     Token.objects.create(user=instance)
