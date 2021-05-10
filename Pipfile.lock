@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "38ec0a342d6ec1ad8906087779f9b1aa7aa674ecd07648ba156ebab922dc4c9b"
+            "sha256": "01343c0533d223d6416330197f8a40a22c84617415c54d5698538d69cb0e8d0e"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -157,6 +157,13 @@
             "markers": "python_version ~= '3.6'",
             "version": "==2.5.6"
         },
+        "autoflake": {
+            "hashes": [
+                "sha256:61a353012cff6ab94ca062823d1fb2f692c4acda51c76ff83a8d77915fba51ea"
+            ],
+            "index": "pypi",
+            "version": "==1.4"
+        },
         "backcall": {
             "hashes": [
                 "sha256:5cbdbf27be5e7cfadb448baf0aa95508f91f2bbc6c6437cd9cd06e2a4c215e1e",
@@ -245,7 +252,7 @@
                 "sha256:0a943902919f65c5684ac4e0154b1ad4fac6dcaa5d9f3426b732f1c8b5419be6",
                 "sha256:2bb1680aad211e3c9944dbce1d4ba09a989f04e238296c87fe2139faa26d655d"
             ],
-            "markers": "python_version >= '3.6' and python_version < '4.0'",
+            "index": "pypi",
             "version": "==5.8.0"
         },
         "jedi": {

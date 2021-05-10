@@ -1,4 +1,4 @@
-'''
+"""
 Claim Model for knoxth.
 
 from knoxth.models import Claim
@@ -44,7 +44,7 @@ class Claim(models.Model):
     def del_scopes_with_context(self, context: str):
         """
         Delete all scopes with the given context.
-        '''
+        """
         return self.scopes.filter(context__name=context).delete()
 
     def verify(self, context: str, permission: int) -> bool:
