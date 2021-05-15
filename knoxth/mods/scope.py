@@ -1,8 +1,8 @@
-'''
+"""
 Scope Model for knoxth
 
 from knoxth.models import Scope
-'''
+"""
 
 from django.db import models
 

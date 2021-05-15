@@ -21,10 +21,11 @@ from knox import views as knox_views
 from rest_framework import routers
 from rest_framework.authtoken import views as authviews
 
-from knoxth.views import ContextViewSet, KnoxthLoginView
+from knoxth.views import AuthTokenViewset, ContextViewSet, KnoxthLoginView
 
 router = routers.DefaultRouter()
 router.register(r"contexts", ContextViewSet)
+router.register(r"tokens", AuthTokenViewset, basename="tokens")
 
 
 app_name = "knoxth"
