@@ -81,4 +81,4 @@ class Scope(models.Model):
         return self.permissions
 
     def __str__(self):
-        return f"Permissions for {self.context.name}"
+        return f"""{", ".join(self.permissions_set)} permissions for "{self.context.name}" context"""

@@ -3,10 +3,11 @@ Serializers for knoxth models
 """
 
 from knox.models import AuthToken
+from knox.serializers import UserSerializer
 from rest_framework import exceptions as drf_exceptions, serializers
 
 from knoxth.fields import ContextField, PermissionsListField
-from knoxth.models import Context, Scope
+from knoxth.models import Claim, Context, Scope
 
 
 class ContextSerializer(serializers.ModelSerializer):
@@ -48,9 +49,11 @@ class AccessTokenSerializer(serializers.ModelSerializer):
     Serializes Knox Token Class `knox.models.AuthToken
     """
 
+    user = UserSerializer()
+
     class Meta:
         model = AuthToken
-        fields = ["user", "created", "expiry", "user"]
+        fields = ["user", "created", "expiry"]
 
 
 class TokenResponseSerializer(serializers.Serializer):
@@ -70,11 +73,18 @@ class TokenResponseSerializer(serializers.Serializer):
         user = validated_data.get("user")
         if user is None:
             raise serializers.ValidationError(
-                f"Pass the user argument when calling save()\
+                f"Pass the user argument when calling save() \
 on {self.__class__.__name__} serializer"
             )
         scopes = validated_data.get("scopes")
-        return scopes.save()
+        token_obj, token = AuthToken.objects.create(user)
+        claim = Claim.objects.create(token=token_obj)
+        for scope in scopes:
+            scope_ser = ScopeSerializer(data=scope)
+            if scope_ser.is_valid():
+                scope_obj = scope_ser.save()
+                claim.scopes.add(scope_obj)
+        return token_obj, token
 
     def update(self, instance, validated_data):
         raise drf_exceptions.NotAcceptable("Tokens cannot be updated!")

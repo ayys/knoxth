@@ -4,22 +4,26 @@ Views for knoxth
 from knoxth.views import ContextViewSet
 from knxoth.views import KnoxthLoginView
 """
-import itertools
-
 from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from knox.models import AuthToken
 from knox.views import LoginView as KnoxLoginView
-from rest_framework import mixins, viewsets
+from rest_framework import mixins, status, viewsets
 from rest_framework.authentication import (
     TokenAuthentication as DRFTokenAuthentication,
 )
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 
-from knoxth.models import Claim, Context, Scope
-from knoxth.serializers import ContextSerializer, ScopeSerializer
+from knoxth.models import Context
+from knoxth.serializers import (
+    AccessTokenSerializer,
+    ContextSerializer,
+    ScopeSerializer,
+    TokenResponseSerializer,
+)
 
 
 class ContextViewSet(viewsets.ReadOnlyModelViewSet):
@@ -54,14 +58,28 @@ class AuthTokenViewset(
     mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet
 ):
     permission_classes = [IsAuthenticated]
-    serializer_class = ScopeSerializer
+    serializer_class = TokenResponseSerializer
 
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        token_obj, token = serializer.save(user=self.request.user)
+        token_serializer = AccessTokenSerializer(token_obj)
+        scopes = ScopeSerializer(token_obj.claim.scopes.all(), many=True)
+        data = token_serializer.data
+        data.update({"token": token})
+        data.update({"scopes": scopes.data})
+        return Response(
+            data,
+            status=status.HTTP_201_CREATED,
+        )
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+
+        serializer = AccessTokenSerializer(queryset, many=True)
+        return Response(serializer.data)
 
     def get_queryset(self):
         auth_tokens = AuthToken.objects.filter(user=self.request.user)
-        claims = Claim.objects.filter(token__in=auth_tokens)
-        scope_pks = [[scope.pk for scope in claim.scopes.all()] for claim in claims]
-        normalized_scope_pks = list(itertools.chain.from_iterable(scope_pks))
-        return Scope.objects.filter(pk__in=normalized_scope_pks)
+        return auth_tokens
