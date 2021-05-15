@@ -31,6 +31,14 @@ class Scope(models.Model):
         default=ALL_PERMISSIONS,
     )
 
+    @property
+    def permissions_set(self):
+        permissions = [
+            "access" if self.permissions & ACCESS else None,
+            "modify" if self.permissions & MODIFY else None,
+            "delete" if self.permissions & DELETE else None,
+        ]
+        return [_ for _ in permissions if _ is not None]
 
     def add_perm(self, perm: int) -> int:
         """
