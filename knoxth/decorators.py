@@ -10,6 +10,8 @@ This decorator does two things:
 
 from functools import wraps
 
+from rest_framework.permissions import IsAuthenticated
+
 from knoxth.auth import IsScoped
 from knoxth.models import Context
 
@@ -37,26 +39,28 @@ def withContext(_class=None, context=None):
       wrapper for viewsets
     """
 
-    def __withContext(cls):
+    def __with_context(Cls):
         """ """
-        assert callable(_class) or _class is None
+        assert callable(Cls) or Cls is None
 
-        @wraps(cls, updated=())
-        class __Decorated(cls):
-            """ """
+        @wraps(Cls, updated=())
+        class __decorated(Cls):
+            """wrapper class for"""
 
             def __init__(self, *args, **kwargs):
-                super(cls, self).__init__(*args, **kwargs)
+                super().__init__(*args, **kwargs)
                 SWSIsScoped = IsScoped
 
                 if context:
                     _context_name = context
                 else:
-                    _context_name = cls.__name__.replace("ViewSet", "").lower()
+                    _context_name = Cls.__name__.replace("ViewSet", "").lower()
                 SWSIsScoped.context = _context_name
+                if IsAuthenticated not in self.permission_classes:
+                    self.permission_classes.append(IsAuthenticated)
                 self.permission_classes.append(SWSIsScoped)
                 Context.objects.get_or_create(name=_context_name)
 
-        return __Decorated
+        return __decorated
 
-    return __withContext(_class) if callable(_class) else __withContext
+    return __with_context(_class) if callable(_class) else __with_context
