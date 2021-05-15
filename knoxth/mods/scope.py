@@ -23,15 +23,14 @@ class Scope(models.Model):
     del_perm(perm) ->  deletes a permission from this scope
 
     """
-    context = models.ForeignKey(
-        Context,
-        on_delete=models.CASCADE)
+
+    context = models.ForeignKey(Context, on_delete=models.CASCADE)
 
     permissions = models.IntegerField(
-        choices=[("ACCESS", ACCESS),
-                 ("MODIFY", MODIFY),
-                 ("DELETE", DELETE)],
-        default=ALL_PERMISSIONS)
+        choices=[("ACCESS", ACCESS), ("MODIFY", MODIFY), ("DELETE", DELETE)],
+        default=ALL_PERMISSIONS,
+    )
+
 
     def add_perm(self, perm: int) -> int:
         """
