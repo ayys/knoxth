@@ -2,12 +2,16 @@
 Serializers for knoxth models
 """
 
-from rest_framework.serializers import ModelSerializer
+import functools
 
-from knoxth.models import Context
+from knox.models import AuthToken
+from rest_framework import exceptions as drf_exceptions, serializers
+
+from knoxth.constants import ACCESS, DELETE, MODIFY
+from knoxth.models import Claim, Context, Scope
 
 
-class ContextSerializer(ModelSerializer):
+class ContextSerializer(serializers.ModelSerializer):
     """
     Serializes the Context model and exposes it's name property
     """
@@ -20,6 +24,7 @@ class ContextSerializer(ModelSerializer):
 
         model = Context
         fields = ["name"]
+
 
 class ScopeSerializer(serializers.ModelSerializer):
     """
