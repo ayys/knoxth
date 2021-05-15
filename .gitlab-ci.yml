@@ -28,11 +28,8 @@ test-tox:
   stage: unittest
   image: themattrix/tox
   script:
-    - cd tests/tests
     - pip install tox
     - tox
-    - mv coverage ../../
-    - cd ../../
   artifacts:
     paths:
       - coverage/
