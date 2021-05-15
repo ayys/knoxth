@@ -36,3 +36,13 @@ class ScopeSerializer(serializers.ModelSerializer):
         fields = ["context", "permissions_set"]
         read_only_fields = ["pk", "context", "permissions_set"]
 
+class AccessTokenSerializer(serializers.ModelSerializer):
+    """
+    Serializes Knox Token Class `knox.models.AuthToken
+    """
+
+    class Meta:
+        model = AuthToken
+        fields = ["user", "created", "expiry", "user"]
+
+
