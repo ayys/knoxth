@@ -1,0 +1,78 @@
+#+TITLE: KNOXTH AUTHENTICATION AND AUTHORIZATION FLOW
+#+AUTHOR: Ayush Jha
+#+SETUPFILE: testapi.theme
+
+* knoxth authentication & authorization flow                           :verb:
+# Manually testing knoxth API
+template http://localhost:8000/
+Accept: application/json
+
+** Get authorization token
+:properties:
+:Verb-Store: auth-code
+:end:
+# Get the authorization token from /authorize endpoint by passing it
+# username and password
+
+post /api/authorize/
+Content-Type: application/json; charset=utf-8
+
+{
+    "username": "{{(read-string "Username: " "admin")}}",
+    "password": "{{(read-string "Password: " "a")}}"
+}
+
+** Get Access token by passing in the authorization token
+   :properties:
+   :Verb-Store: access-token
+   :end:
+# Use Emacs Lisp code tags to make the request
+# content dynamic. Code tags can be used anywhere
+# in the request specification.
+
+post /api/login/
+Authorization: Token {{(read-string "Authorization Code:" (verb-json-get (oref (verb-stored-response "auth-code") body) "token"))}}
+
+** List all possible contexts
+# Return json list of all contexts available to user
+get /api/contexts/
+Authorization: Token {{(read-string "Access Token: " (verb-json-get (oref (verb-stored-response "access-token") body) "token"))}}
+
+** List all tokens for user
+# List of all the tokens created for this user
+get /api/tokens/
+Authorization: Token {{(read-string "Access Token: " (verb-json-get (oref (verb-stored-response "access-token") body) "token"))}}
+
+** Create a new token with specified contexts and scopes
+# List of all the tokens created for this user
+post /api/tokens/
+Authorization: Token {{(read-string "Access Token: " (verb-json-get (oref (verb-stored-response "access-token") body) "token"))}}
+
+[{
+"context": "home",
+"permissions": ["access", "modify"]
+},
+{
+"context": "home",
+"permissions": ["delete"]
+}]
+
+** Home View Test
+# List of all the tokens created for this user
+get /home/
+Authorization: Token {{(read-string "Access Token: " (verb-json-get (oref (verb-stored-response "access-token") body) "token"))}}
+
+** Create new token with specific scopes for user
+# Create a new token with custom scopes for userr
+post /api/tokens/
+Authorization: Token {{(read-string "Access Token: " (verb-json-get (oref (verb-stored-response "access-token") body) "token"))}}
+[{
+  "context": "all_pet_names",
+  "permissions": ["access"]
+},{
+  "context": "dogs",
+  "permissions": ["access", "modify"]
+}, {
+  "context": "cats",
+  "permissions": ["access", "modify", "delete"]
+}]
