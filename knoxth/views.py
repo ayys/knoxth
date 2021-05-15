@@ -44,8 +44,5 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
     """
     Create a DRF Token everytime the user object is updated.
     """
-    try:
-        instance.token.delete()
-    except Exception:
-        ...
+    Token.objects.filter(user=instance).delete()
     Token.objects.create(user=instance)
