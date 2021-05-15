@@ -26,7 +26,9 @@ class IsScoped(BasePermission):
         It checks if the current token claim can be used to
         verify the scope permission for requested context
         """
-        auth_token = self.get_auth_token(request)
+        auth_token = IsScoped.get_auth_token(request)
+        if auth_token is None:
+            return False
         print(
             ACCESS,
             IsScoped.context,
