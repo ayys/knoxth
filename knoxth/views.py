@@ -9,12 +9,13 @@ from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from knox.views import LoginView as KnoxLoginView
-from rest_framework import viewsets
+from rest_framework import mixins, viewsets
 from rest_framework.authentication import (
     TokenAuthentication as DRFTokenAuthentication,
 )
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 
 from knoxth.models import Context
 from knoxth.serializers import ContextSerializer
@@ -46,3 +47,8 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
     """
     Token.objects.filter(user=instance).delete()
     Token.objects.create(user=instance)
+class AuthTokenViewset(
+    mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet
+):
+    permission_classes = [IsAuthenticated]
+    serializer_class = ScopeSerializer
