@@ -47,7 +47,9 @@ The project layout should look like:
     ./Pipfile.lock
     ./Pipfile
 
-It may look unusual that the application has been created within the project directory. Using the project's namespace avoids name clashes with external modules (a topic that goes outside the scope of the quickstart).
+It may look unusual that the application has been created within the
+project directory. Using the project's namespace avoids name clashes
+with external modules (a topic that goes outside the scope of the quickstart).
 
 ### Add to INSTALLED_APPS
 
@@ -121,11 +123,13 @@ class Dog(Pet):
     barks_alot = models.BooleanField()
 ```
 
-Notice that we are using an abstract model to store the common properties. Read more about them [over at the django docs](https://docs.djangoproject.com/en/3.2/topics/db/models/#abstract-base-classes).
+Notice that we are using an abstract model to store the common
+properties. Read more about them [over at the django docs](https://docs.djangoproject.com/en/3.2/topics/db/models/#abstract-base-classes).
 
 
 ## 3. Create Serializers
-Serializers help us control data-accessability from our models to our views. For this tutorial, we will create a simple serializer for both the `Cat` and `Dog` modls.
+Serializers help us control data-accessability from our models to our
+views. For this tutorial, we will create a simple serializer for both the `Cat` and `Dog` models.
 
 Create a `serializers.py` in your `pets` app, with the following content.
 
