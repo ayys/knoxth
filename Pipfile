@@ -15,9 +15,9 @@ isort = "*"
 mkdocs = "*"
 mkdocs-custommill = "*"
 mkdocstrings = "*"
-pylint = "*"
 pylint-django = "*"
 tox = "*"
+jedi = "*"
 
 [packages]
 django = "*"
