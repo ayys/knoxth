@@ -7,10 +7,8 @@ from knxoth.views import KnoxthLoginView
 import itertools
 
 from django.conf import settings
-from django.core.exceptions import ObjectDoesNotExist
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from django.shortcuts import get_object_or_404
 from knox.models import AuthToken
 from knox.views import LoginView as KnoxLoginView
 from rest_framework import mixins, viewsets
@@ -19,7 +17,6 @@ from rest_framework.authentication import (
 )
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
 
 from knoxth.models import Claim, Context, Scope
 from knoxth.serializers import ContextSerializer, ScopeSerializer

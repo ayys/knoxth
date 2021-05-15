@@ -11,13 +11,12 @@ class ClaimTestCase(TestCase):
         self.context = Context.objects.create(name="Hello")
 
         self.scope = Scope.objects.create(
-            context=self.context,
-            permissions=constants.ACCESS)
+            context=self.context, permissions=constants.ACCESS
+        )
 
         self.user = User.objects.create(
-            username="ayush",
-            email="meow@meow.com",
-            password="meow")
+            username="ayush", email="meow@meow.com", password="meow"
+        )
 
         self.auth, self.token = KnoxToken.objects.create(user=self.user)
 
@@ -87,7 +86,9 @@ class ClaimTestCase(TestCase):
         final_scope_count = claim.scopes.all().count()
         self.assertEqual(final_scope_count, prev_scope_count)
 
-    def test_claim_delete_scopes_with_nonexistant_context_and_different_permissions(self):
+    def test_claim_delete_scopes_with_nonexistant_context_and_different_permissions(
+        self,
+    ):
         claim = Claim.objects.create(token=self.auth)
         claim.add_scope("First Context", constants.ACCESS | constants.MODIFY)
         claim.add_scope("Second Context", constants.ACCESS | constants.MODIFY)

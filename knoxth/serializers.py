@@ -86,7 +86,8 @@ class TokenResponseSerializer(serializers.Serializer):
         user = validated_data.get("user")
         if user is None:
             raise serializers.ValidationError(
-                f"Pass the `user` argument when calling save() on {self.__class__.__name__} serializer"
+                f"Pass the user argument when calling save()\
+on {self.__class__.__name__} serializer"
             )
         context_name = validated_data.get("context")
         if Context.objects.filter(name=context_name).empty():
