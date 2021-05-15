@@ -53,21 +53,29 @@ class IsScoped(BasePermission):
             )
         )
 
-    def get_auth_token(self, request):
+    @staticmethod
+    def get_auth_token(request):
         """
         Returns the Knox AuthToken object for given request.
         """
         auth = get_authorization_header(request).split()
         if len(auth) == 2:
-            token = auth[1].decode("UTF-8")
-            token_key = token[: CONSTANTS.TOKEN_KEY_LENGTH]
-            authtoken = AuthToken.objects.get(token_key=str(token_key))
-            try:
-                # try to access the token claim
-                authtoken.claim
-            except ObjectDoesNotExist:
-                # if the claim does not exist, it's probably a login token
-                # So lets not add any scopes, just incase ;)
-                Claim.objects.create(token=authtoken)
-            return authtoken
+            return IsScoped.token_to_authtoken(auth[1])
         return None
+
+    @staticmethod
+    def token_to_authtoken(token: bytes):
+        """
+        Take token bytes from request header and output AuthToken object
+        """
+        token = token.decode("UTF-8")
+        token_key = token[: CONSTANTS.TOKEN_KEY_LENGTH]
+        authtoken = AuthToken.objects.get(token_key=str(token_key))
+        try:
+            # try to access the token claim
+            authtoken.claim
+        except ObjectDoesNotExist:
+            # if the claim does not exist, it's probably a login token
+            # So lets not add any scopes, just incase ;)
+            Claim.objects.create(token=authtoken)
+        return authtoken
