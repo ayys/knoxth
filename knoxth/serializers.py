@@ -20,3 +20,14 @@ class ContextSerializer(ModelSerializer):
 
         model = Context
         fields = ["name"]
+
+class ScopeSerializer(serializers.ModelSerializer):
+    """
+    Serializes knoxth Scopes with field - context:str , permissions: [str...]
+    """
+
+    class Meta:
+        model = Scope
+        fields = ["context", "permissions_set"]
+        read_only_fields = ["pk", "context", "permissions_set"]
+
