@@ -7,6 +7,8 @@ from django.dispatch import receiver
 from knox.models import AuthToken
 
 from knoxth.mods.claim import Claim
+from knoxth.mods.context import Context
+from knoxth.mods.scope import Scope
 
 
 @receiver(models.signals.post_save, sender=AuthToken)
