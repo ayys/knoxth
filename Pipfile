@@ -18,6 +18,7 @@ mkdocstrings = "*"
 pylint-django = "*"
 tox = "*"
 jedi = "*"
+sentry-sdk = "*"
 
 [packages]
 django = "*"
