@@ -63,6 +63,7 @@ class TokenResponseSerializer(serializers.Serializer):
         [{ "context": "employees", "permissions": ["access"] }]
     """
 
+    name = serializers.CharField()
     scopes = ScopeSerializer(many=True)
 
     def create(self, validated_data):
@@ -76,9 +77,10 @@ class TokenResponseSerializer(serializers.Serializer):
                 f"Pass the user argument when calling save() \
 on {self.__class__.__name__} serializer"
             )
+        name = validated_data.get("name")
         scopes = validated_data.get("scopes")
         token_obj, token = AuthToken.objects.create(user)
-        claim = Claim.objects.create(token=token_obj)
+        claim = Claim.objects.create(name=name, token=token_obj)
         for scope in scopes:
             scope_ser = ScopeSerializer(data=scope)
             if scope_ser.is_valid():

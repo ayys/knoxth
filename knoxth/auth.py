@@ -79,5 +79,5 @@ class IsScoped(BasePermission):
         except ObjectDoesNotExist:
             # if the claim does not exist, it's probably a login token
             # So lets not add any scopes, just incase ;)
-            Claim.objects.create(token=authtoken)
+            Claim.objects.create(name="Main", token=authtoken)
         return authtoken

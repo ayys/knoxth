@@ -18,6 +18,7 @@ class Claim(models.Model):
     a specific token
     """
 
+    name = models.CharField(max_length=255)
     token = models.OneToOneField(KnoxToken, on_delete=models.CASCADE)
     scopes = models.ManyToManyField(Scope)
 
