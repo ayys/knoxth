@@ -38,13 +38,7 @@ class Scope(models.Model):
         Convert the permission strings to integer
         """
         perm_ints = map(
-            lambda perm: ACCESS
-            if perm.lower() == "access"
-            else MODIFY
-            if perm.lower() == "modify"
-            else DELETE
-            if perm.lower() == "delete"
-            else 0,
+            lambda perm: ACCESS if perm.lower() == "access" else MODIFY if perm.lower() == "modify" else DELETE if perm.lower() == "delete" else 0,
             perms,
         )
         return functools.reduce(lambda p1, p2: p1 | p2, perm_ints)

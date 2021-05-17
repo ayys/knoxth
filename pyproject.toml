@@ -1,0 +1,6 @@
+[tool.black]
+line-length = 150
+include = '\.pyi?$'
+extend-exclude = '''
+migrations
+'''

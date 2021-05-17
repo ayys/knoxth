@@ -7,9 +7,7 @@ from knoxth.models import Context, Scope
 class ScopeTestCase(TestCase):
     def setUp(self):
         self.context = Context.objects.create(name="Hello")
-        self.scope = Scope.objects.create(
-            context=self.context, permissions=constants.ACCESS
-        )
+        self.scope = Scope.objects.create(context=self.context, permissions=constants.ACCESS)
 
     def test_scope_with_no_context(self):
         with self.assertRaises(IntegrityError):

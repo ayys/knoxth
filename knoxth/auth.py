@@ -38,18 +38,9 @@ class IsScoped(BasePermission):
         return bool(
             auth_token
             and (
-                (
-                    request.method in SAFE_METHODS
-                    and auth_token.claim.verify(IsScoped.context, ACCESS)
-                )
-                or (
-                    (request.method == "POST")
-                    and auth_token.claim.verify(IsScoped.context, MODIFY)
-                )
-                or (
-                    (request.method == "DELETE")
-                    and auth_token.claim.verify(IsScoped.context, DELETE)
-                )
+                (request.method in SAFE_METHODS and auth_token.claim.verify(IsScoped.context, ACCESS))
+                or ((request.method == "POST") and auth_token.claim.verify(IsScoped.context, MODIFY))
+                or ((request.method == "DELETE") and auth_token.claim.verify(IsScoped.context, DELETE))
             )
         )
 

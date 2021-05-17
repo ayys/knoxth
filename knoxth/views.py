@@ -86,7 +86,5 @@ class LogoutAllExceptCurrentView(views.APIView):
     def post(self, request, format=None):
         authtoken = IsScoped.get_auth_token(request)
         request.user.auth_token_set.filter(~Q(id=authtoken.id)).delete()
-        user_logged_out.send(
-            sender=request.user.__class__, request=request, user=request.user
-        )
+        user_logged_out.send(sender=request.user.__class__, request=request, user=request.user)
         return Response(None, status=status.HTTP_204_NO_CONTENT)

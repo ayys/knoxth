@@ -10,13 +10,9 @@ class ClaimTestCase(TestCase):
     def setUp(self):
         self.context = Context.objects.create(name="Hello")
 
-        self.scope = Scope.objects.create(
-            context=self.context, permissions=constants.ACCESS
-        )
+        self.scope = Scope.objects.create(context=self.context, permissions=constants.ACCESS)
 
-        self.user = User.objects.create(
-            username="ayush", email="meow@meow.com", password="meow"
-        )
+        self.user = User.objects.create(username="ayush", email="meow@meow.com", password="meow")
 
         self.auth, self.token = KnoxToken.objects.create(user=self.user)
 

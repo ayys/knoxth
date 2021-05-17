@@ -40,9 +40,7 @@ class Claim(models.Model):
         """
         Delete a scope with the given context and permissions. If scopes don't match, do nothing.
         """
-        return self.scopes.filter(
-            context__name=context, permissions=permissions
-        ).delete()
+        return self.scopes.filter(context__name=context, permissions=permissions).delete()
 
     def del_scopes_with_context(self, context: str):
         """
@@ -54,16 +52,7 @@ class Claim(models.Model):
         """
         Verifies that the claim accepts given permissions for the given context.
         """
-        return (
-            len(
-                [
-                    1
-                    for _ in self.scopes.filter(context__name=context)
-                    if _.permissions & permission != 0
-                ]
-            )
-            > 0
-        )
+        return len([1 for _ in self.scopes.filter(context__name=context) if _.permissions & permission != 0]) > 0
 
     def __str__(self):
         return f"Token {self.token.digest[:5]}... has {[_ for _ in self.scopes.all()]} scopes"
