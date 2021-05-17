@@ -3,14 +3,12 @@ contains IsScoped which is a permission class that uses scopes
 assigned to knox tokens for authorization
 """
 
-from django.core.exceptions import ObjectDoesNotExist
 from knox.models import AuthToken
 from knox.settings import CONSTANTS
 from rest_framework.authentication import get_authorization_header
 from rest_framework.permissions import SAFE_METHODS, BasePermission
 
 from knoxth.constants import ACCESS, DELETE, MODIFY
-from knoxth.models import Claim
 
 
 class IsScoped(BasePermission):
@@ -64,11 +62,4 @@ class IsScoped(BasePermission):
         token = token.decode("UTF-8")
         token_key = token[: CONSTANTS.TOKEN_KEY_LENGTH]
         authtoken = AuthToken.objects.get(token_key=str(token_key))
-        try:
-            # try to access the token claim
-            authtoken.claim
-        except ObjectDoesNotExist:
-            # if the claim does not exist, it's probably a login token
-            # So lets not add any scopes, just incase ;)
-            Claim.objects.create(name="Main", token=authtoken)
         return authtoken
