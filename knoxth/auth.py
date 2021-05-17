@@ -54,13 +54,15 @@ class IsScoped(BasePermission):
         )
 
     @staticmethod
-    def get_auth_token(request):
+    def get_auth_token(request, token_too=False):
         """
         Returns the Knox AuthToken object for given request.
+        if token_too is True, returns a tuple (AuthToken Obj, Token String)
         """
         auth = get_authorization_header(request).split()
         if len(auth) == 2:
-            return IsScoped.token_to_authtoken(auth[1])
+            authtoken = IsScoped.token_to_authtoken(auth[1])
+            return (authtoken, auth[1]) if token_too else authtoken
         return None
 
     @staticmethod
