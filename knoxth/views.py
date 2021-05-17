@@ -23,12 +23,7 @@ from rest_framework.response import Response
 from knoxth import mixins
 from knoxth.auth import IsScoped
 from knoxth.models import Context
-from knoxth.serializers import (
-    AccessTokenSerializer,
-    ContextSerializer,
-    ScopeSerializer,
-    TokenResponseSerializer,
-)
+from knoxth.serializers import ContextSerializer, TokenResponseSerializer
 
 
 class ContextViewSet(viewsets.ReadOnlyModelViewSet):
@@ -60,30 +55,22 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
 
 
 class AuthTokenViewset(
-    mixins.CreateModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet
+    mixins.CreateTokenMixin,
+    mixins.ListTokensMixin,
+    mixins.DestroyTokenMixin,
+    viewsets.GenericViewSet,
 ):
+    """
+    Viewset that deals with authtoken stuff
+
+    * create new token
+    * delete token
+    * list tokens for user
+    * refresh token
+    """
+
     permission_classes = [IsAuthenticated]
     serializer_class = TokenResponseSerializer
-
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        token_obj, token = serializer.save(user=self.request.user)
-        token_serializer = AccessTokenSerializer(token_obj)
-        scopes = ScopeSerializer(token_obj.claim.scopes.all(), many=True)
-        data = token_serializer.data
-        data.update({"token": token})
-        data.update({"scopes": scopes.data})
-        return Response(
-            data,
-            status=status.HTTP_201_CREATED,
-        )
-
-    def list(self, request, *args, **kwargs):
-        queryset = self.filter_queryset(self.get_queryset())
-
-        serializer = AccessTokenSerializer(queryset, many=True)
-        return Response(serializer.data)
 
     def get_queryset(self):
         auth_tokens = AuthToken.objects.filter(user=self.request.user)
