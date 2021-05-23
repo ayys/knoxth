@@ -16,7 +16,7 @@
 </p>
 
 <p align="center">
-<a href="#introduction">Key Features</a> •
+<a href="#introduction">Introduction</a> •
   <a href="#installation">Installation</a> •
   <a href="https://ayys.gitlab.io/knoxth/getting-started/">How To Use</a> •
   <a href="https://ayys.gitlab.io/knoxth/">Documentation</a> •
