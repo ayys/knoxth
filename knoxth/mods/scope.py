@@ -53,7 +53,7 @@ class Scope(models.Model):
         return [_ for _ in permissions if _ is not None]
 
     @permissions_set.setter
-    def set_permissions_from_permissions_set(self, new_perms_set):
+    def permissions_set(self, new_perms_set):
         self.permissions = Scope.permissions_set_to_int(new_perms_set)
 
     def add_perm(self, perm: int) -> int:
