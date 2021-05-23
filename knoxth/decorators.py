@@ -28,12 +28,12 @@ def withContext(_class=None, context=None):
         ...
 
     2. With custom context
-    @withContext("some-context")
+    @withContext(context="some-context")
     class SomeViewSet(viewsets.ModelViewSet):
         ...
 
     Args:
-      context: Default value = None)
+      context: Default value = None
 
     Returns:
       wrapper for viewsets
