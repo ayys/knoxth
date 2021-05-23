@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <img src="images/logo.svg" width="200" />
+  <img src="https://raw.githubusercontent.com/ayys/knoxth/master/images/logo.svg" width="200" />
   <br>
   Knoxth - Auth for Knox
   <br>
