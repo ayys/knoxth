@@ -1,7 +1,8 @@
 from django.test import TestCase
+from rest_framework.viewsets import ReadOnlyModelViewSet
+
 from knoxth.auth import IsScoped
 from knoxth.decorators import withContext
-from rest_framework.viewsets import ReadOnlyModelViewSet
 
 
 class WithContextTestCase(TestCase):
