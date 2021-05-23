@@ -26,7 +26,7 @@ def delete_claim_if_possible(sender, instance, **kwargs):
     Create a default claim for all tokens
     """
     claims = Claim.objects.filter(token=instance)
-    if not AuthToken.objects.filter(~models.Q(id=instance.id)).filter(claim__in=claims).exists():
+    if not AuthToken.objects.filter(~models.Q(pk=instance.pk)).filter(claim__in=claims).exists():
         # if other auth tokens do not contain the claim belonging to this auth token,
         # delete the claims
         claims.delete()
