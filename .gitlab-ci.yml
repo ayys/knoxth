@@ -18,11 +18,11 @@ test-flake8:
     - pip install flake8
     - flake8 knoxth
 
-test-isort:
+test-black:
   stage: lint
   script:
-    - pip install isort
-    - isort --check-only --diff knoxth setup.py
+    - pip install black
+    - black --check --diff knoxth setup.py
 
 test-tox:
   stage: unittest
