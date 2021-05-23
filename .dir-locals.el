@@ -5,5 +5,5 @@
                  (eval . (flycheck-mode t))
                  (eval . (progn
                            (pipenv-activate)))
-                 (flycheck--automatically-enabled-checkers . (python-flake8))
+                 (flycheck--automatically-enabled-checkers . (python-flake8 python-pylint))
                  (flycheck--automatically-disabled-checkers . (python-mypy)))))

@@ -7,17 +7,30 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('knox', '0007_auto_20190111_0542'),
-        ('knoxth', '0001_initial'),
+        ("knox", "0007_auto_20190111_0542"),
+        ("knoxth", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Claim',
+            name="Claim",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('scopes', models.ManyToManyField(to='knoxth.Scope')),
-                ('token', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='knox.authtoken')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("scopes", models.ManyToManyField(to="knoxth.Scope")),
+                (
+                    "token",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE, to="knox.authtoken"
+                    ),
+                ),
             ],
         ),
     ]

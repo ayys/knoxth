@@ -10,7 +10,7 @@ extension-pkg-allow-list=
 # run arbitrary code. (This is an alternative name to extension-pkg-allow-list
 # for backward compatibility.)
 extension-pkg-whitelist=
-django-settings-module = tests.tests.tests.settings
+django-settings-module = knoxth_project.settings
 # Specify a score threshold to be exceeded before program exits with error.
 fail-under=10.0
 
@@ -19,11 +19,13 @@ ignore=CVS,static,templates
 
 # Files or directories matching the regex patterns are skipped. The regex
 # matches against base names, not paths.
-ignore-patterns=
+ignore-patterns=migrations,.tox
 
 # Python code to execute, usually for sys.path manipulation such as
 # pygtk.require().
-#init-hook=
+# so for some reason, this is necessary or else pylint won't know where
+# the django module is
+init-hook=sys.path += [os.path.abspath(os.path.join(os.path.sep, *sys.argv[-1].split(os.sep)[:i])) for i, _ in enumerate(sys.argv[-1].split(os.sep)) if os.path.isdir(os.path.abspath(os.path.join(os.path.sep, *sys.argv[-1].split(os.sep)[:i], '.git')))][::-1]
 
 # Use multiple processes to speed up Pylint. Specifying 0 will auto-detect the
 # number of processors available to use.

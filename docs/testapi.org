@@ -33,6 +33,30 @@ Content-Type: application/json; charset=utf-8
 post /api/login/
 Authorization: Token {{(read-string "Authorization Code:" (verb-json-get (oref (verb-stored-response "auth-code") body) "token"))}}
 
+** Logout of all places
+
+   :properties:
+   :Verb-Store: access-token
+   :end:
+# Use Emacs Lisp code tags to make the request
+# content dynamic. Code tags can be used anywhere
+# in the request specification.
+
+post /api/logoutall/
+Authorization: Token {{(read-string "Access Token: " (verb-json-get (oref (verb-stored-response "access-token") body) "token"))}}
+
+** Logout of current session (invalidate token)
+
+   :properties:
+   :Verb-Store: access-token
+   :end:
+# Use Emacs Lisp code tags to make the request
+# content dynamic. Code tags can be used anywhere
+# in the request specification.
+
+post /api/logout/
+Authorization: Token {{(read-string "Access Token: " (verb-json-get (oref (verb-stored-response "access-token") body) "token"))}}
+
 ** List all possible contexts
 # Return json list of all contexts available to user
 get /api/contexts/
@@ -47,32 +71,18 @@ Authorization: Token {{(read-string "Access Token: " (verb-json-get (oref (verb-
 # List of all the tokens created for this user
 post /api/tokens/
 Authorization: Token {{(read-string "Access Token: " (verb-json-get (oref (verb-stored-response "access-token") body) "token"))}}
+Content-Type: application/json
 
-[{
+{"scopes": [{
 "context": "home",
-"permissions": ["access", "modify"]
+"permissions_set": ["access", "modify"]
 },
 {
 "context": "home",
-"permissions": ["delete"]
-}]
+"permissions_set": ["delete"]
+}]}
 
 ** Home View Test
 # List of all the tokens created for this user
-get /home/
-Authorization: Token {{(read-string "Access Token: " (verb-json-get (oref (verb-stored-response "access-token") body) "token"))}}
-
-** Create new token with specific scopes for user
-# Create a new token with custom scopes for userr
-post /api/tokens/
-Authorization: Token {{(read-string "Access Token: " (verb-json-get (oref (verb-stored-response "access-token") body) "token"))}}
-[{
-  "context": "all_pet_names",
-  "permissions": ["access"]
-},{
-  "context": "dogs",
-  "permissions": ["access", "modify"]
-}, {
-  "context": "cats",
-  "permissions": ["access", "modify", "delete"]
-}]
+get /users/
+Authorization: Token 4efd1c6a6e005126de8dde71eaba979eacef52be1a5f938523e846d325c9eb21

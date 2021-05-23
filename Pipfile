@@ -4,7 +4,6 @@ verify_ssl = true
 name = "pypi"
 
 [dev-packages]
-Werkzeug = "*"
 autoflake = "*"
 coverage = "*"
 django-extensions= "*"
@@ -12,12 +11,15 @@ django-stubs = "*"
 flake8 = "*"
 ipython = "*"
 isort = "*"
+jedi = "*"
 mkdocs = "*"
 mkdocs-custommill = "*"
 mkdocstrings = "*"
+pylint = "*"
 pylint-django = "*"
+sentry-sdk = "*"
 tox = "*"
-jedi = "*"
+Werkzeug = "*"
 
 [packages]
 django = "*"
@@ -25,4 +27,4 @@ djangorestframework = "*"
 django-rest-knox = "*"
 
 [requires]
-python_version = "3.9"
+python_version = "3"
