@@ -22,7 +22,7 @@ class Claim(models.Model):
     token = models.OneToOneField(KnoxToken, on_delete=models.CASCADE)
     scopes = models.ManyToManyField(Scope)
 
-    def add_scope(self, context: str, permissions: int):
+    def add_scope(self, context: str, permissions: int = None, permissions_set: list = None):
         """
         Adds a scope with given context and permissions
 
@@ -31,6 +31,10 @@ class Claim(models.Model):
 
         context has to be a string.
         """
+
+        if permissions_set is not None:
+            permissions = Scope.permissions_set_to_int(permissions_set)
+
         return self.scopes.get_or_create(
             context=Context.objects.get_or_create(name=context)[0],
             permissions=permissions,
