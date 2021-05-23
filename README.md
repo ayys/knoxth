@@ -16,32 +16,33 @@
 </p>
 
 <p align="center">
-<a href="#key-features">Key Features</a> •
+<a href="#introduction">Key Features</a> •
   <a href="#installation">Installation</a> •
   <a href="https://ayys.gitlab.io/knoxth/getting-started/">How To Use</a> •
   <a href="https://ayys.gitlab.io/knoxth/">Documentation</a> •
   <a href="#license">License</a>
 </p>
 
-## Key Features
+## Introduction
 
-* LivePreview - Make changes, See changes
-  - Instantly see what your Markdown documents look like in HTML as you create them.
-* Sync Scrolling
-  - While you type, LivePreview will automatically scroll to the current location you're editing.
-* GitHub Flavored Markdown
-* Syntax highlighting
-* [KaTeX](https://khan.github.io/KaTeX/) Support
-* Dark/Light mode
-* Toolbar for basic Markdown formatting
-* Supports multiple cursors
-* Save the Markdown preview as PDF
-* Emoji support in preview :tada:
-* App will keep alive in tray for quick usage
-* Full screen mode
-  - Write distraction free.
-* Cross platform
-  - Windows, macOS and Linux ready.
+Django Rest Frameowork is an amazingly simple to use and easy
+frameowork to write REST APIs in Django. With Knox, you can secure
+your API with Access Tokens. Yet, there is a gap left by Knox, the
+need for context-specific authentication system built on top of knox.
+
+Users will want to customize the "scope" of each token they
+create. This way, users may create different tokens for separate
+usecases.
+
+Let's take an example. Let us say you are developinga rest api that
+lets it's create and manage TODO lists. Now, you have a viewset that
+handles all CRUD operations, but you want to provide a way for users
+to manage access to their todo lists on a token level. So, a user may
+want to create a token, with which they can only read TODO lists, but
+not modify them.
+
+This is where knoxth comes in. Knoxth implements contextual
+authorization of DRF viewsets on token level, using Knox Tokens.
 
 ## Installation
 
