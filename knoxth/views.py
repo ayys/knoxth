@@ -66,7 +66,6 @@ class AuthTokenViewset(
     * create new token
     * delete token
     * list tokens for user
-    * refresh token
     """
 
     permission_classes = [IsAuthenticated]
@@ -75,6 +74,27 @@ class AuthTokenViewset(
     def get_queryset(self):
         auth_tokens = AuthToken.objects.filter(user=self.request.user)
         return auth_tokens
+
+
+class AuthTokenRefresh(views.APIView):
+    """
+    Refresh AuthToken such that a new token is needed to authenticate
+    """
+
+    permission_classes = [IsAuthenticated]
+    serializer_class = TokenResponseSerializer
+
+    def get(self, request, *args, **kwargs):
+        """
+        create a new authtoken object and copy its creds to old one
+        """
+        authtoken = IsScoped.get_auth_token(request)
+        new_authtoken = AuthToken.objects.create(request.user)[0]
+        for field in AuthToken._meta.fields:
+            att = field.attname
+            setattr(authtoken, att, getattr(new_authtoken, att))
+        authtoken.save()
+        new_authtoken.delete()
 
 
 class LogoutAllExceptCurrentView(views.APIView):
