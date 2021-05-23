@@ -11,11 +11,13 @@ try:
 except Exception:
     long_description = ""
 
+print(find_packages(exclude=["knoxth_project", "test_app", "test_app.migrations"]))
+
 setup(
     # Name of the package
     name="knoxth",
     # Packages to include into the distribution
-    packages=find_packages("."),
+    packages=find_packages(exclude=["knoxth_project", "test_app", "test_app.migrations"]),
     # Start with a small number and increase it with
     # every change you make https://semver.org
     version="0.0.1",
@@ -24,22 +26,47 @@ setup(
     # repository. For example: MIT
     license="GPL-3.0",
     # Short description of your library
-    description=" Knoxth lets you do scope based authorization on knox tokens ",
+    description="Knoxth uses Knox tokens to provide token-level authorization management for DRF viewsets",
     # Long description of your library
     long_description=long_description,
     long_description_content_type="text/markdown",
     # Your name
     author="Ayush Jha",
     # Your email
-    author_email="ayushjha@niyasti.com",
+    author_email="ayushjha@protonmail.com",
     # Either the link to your github or to your website
     url="https://gitlab.com/ayys",
     # Link from which the project can be downloaded
     download_url="",
     # List of keywords
-    keywords=["drf", "authorization", "tokenauthorization", "knox", "scope"],
+    keywords=[
+        "drf",
+        "authorization",
+        "tokenauthorization",
+        "knox",
+        "scope",
+    ],
     # List of packages to install with this one
-    install_requires=[""],
+    install_requires=[
+        "knox",
+    ],
     # https://pypi.org/classifiers/
-    classifiers=[],
+    classifiers=[
+        # How mature is this project? Common values are
+        #   3 - Alpha
+        #   4 - Beta
+        #   5 - Production/Stable
+        "Development Status :: 3 - Alpha",
+        # Indicate who your project is intended for
+        "Intended Audience :: Developers",
+        "Topic :: Internet :: WWW/HTTP :: Session",
+        # Pick your license as you wish (should match "license" above)
+        "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Framework :: Django",
+    ],
 )

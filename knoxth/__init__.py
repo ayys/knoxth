@@ -10,3 +10,5 @@ from knoxth.decorators import withContext
 class SomeViewSet(viewsets.ModelViewSet):
     ...
 """
+
+__version__ = "0.0.1"
