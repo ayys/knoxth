@@ -21,6 +21,21 @@ class ScopeTestCase(TestCase):
         self.scope.add_perm(78)  # throw  error
         self.assertEqual(self.scope.permissions, constants.ACCESS)
 
+    def test_get_permissions_set(self):
+        self.assertEqual(self.scope.permissions_set, ["access"])
+
+    def test_set_permissions_set(self):
+        perms_set = ["access", "modify"]
+        self.scope.permissions_set = perms_set
+        self.assertEqual(self.scope.permissions_set, perms_set)
+        self.assertEqual(self.scope.permissions, Scope.permissions_set_to_int(perms_set))
+
+    def test_permissions_set_to_int(self):
+        self.assertEqual(Scope.permissions_set_to_int(["access"]), constants.ACCESS)
+        self.assertEqual(Scope.permissions_set_to_int(["modify"]), constants.MODIFY)
+        self.assertEqual(Scope.permissions_set_to_int(["delete"]), constants.DELETE)
+        self.assertEqual(Scope.permissions_set_to_int(["delete", "access"]), constants.DELETE | constants.ACCESS)
+
     def test_add_known_perm_to_scope(self):
         self.scope.add_perm(constants.MODIFY)  # throw  error
         self.assertEqual(self.scope.permissions, constants.ACCESS | constants.MODIFY)
