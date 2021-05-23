@@ -84,20 +84,5 @@ Content-Type: application/json
 
 ** Home View Test
 # List of all the tokens created for this user
-get /home/
-Authorization: Token {{(read-string "Access Token: " (verb-json-get (oref (verb-stored-response "access-token") body) "token"))}}
-
-** Create new token with specific scopes for user
-# Create a new token with custom scopes for userr
-post /api/tokens/
-Authorization: Token {{(read-string "Access Token: " (verb-json-get (oref (verb-stored-response "access-token") body) "token"))}}
-[{
-  "context": "all_pet_names",
-  "permissions": ["access"]
-},{
-  "context": "dogs",
-  "permissions": ["access", "modify"]
-}, {
-  "context": "cats",
-  "permissions": ["access", "modify", "delete"]
-}]
+get /users/
+Authorization: Token 4efd1c6a6e005126de8dde71eaba979eacef52be1a5f938523e846d325c9eb21
