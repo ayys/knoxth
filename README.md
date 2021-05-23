@@ -25,6 +25,8 @@
 
 ## Introduction
 
+Knoxth uses Knox tokens to provide token-level authorization management for DRF viewsets.
+
 Django Rest Frameowork is an amazingly simple to use and easy
 frameowork to write REST APIs in Django. With Knox, you can secure
 your API with Access Tokens. Yet, there is a gap left by Knox, the
