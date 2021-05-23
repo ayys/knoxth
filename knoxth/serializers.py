@@ -7,7 +7,7 @@ from knox.serializers import UserSerializer
 from rest_framework import exceptions as drf_exceptions, serializers
 
 from knoxth.fields import ContextField, PermissionsListField
-from knoxth.models import Claim, Context, Scope
+from knoxth.models import Context, Scope
 
 
 class ContextSerializer(serializers.ModelSerializer):
@@ -80,7 +80,9 @@ on {self.__class__.__name__} serializer"
         name = validated_data.get("name")
         scopes = validated_data.get("scopes")
         token_obj, token = AuthToken.objects.create(user)
-        claim = Claim.objects.create(name=name, token=token_obj)
+        claim = token_obj.claim
+        claim.name = name
+        claim.save()
         for scope in scopes:
             scope_ser = ScopeSerializer(data=scope)
             if scope_ser.is_valid():
