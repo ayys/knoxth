@@ -4,7 +4,9 @@ repo_url: https://github.com/ayys/knoxth
 nav:
   - Home: 'index.md'
   - Installation: 'installation.md'
+
   - Getting Started: 'getting-started.md'
   - API Guide:
       - Permissions: 'perms.md'
       - Decorators: 'decorators.md'
+  - Coverage Report: 'https://ayys.gitlab.io/knoxth/coverage/'
