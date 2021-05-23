@@ -22,7 +22,7 @@ class ClaimTestCase(TestCase):
         with self.assertRaises(IntegrityError):
             Claim.objects.create()
 
-    def test_claim_with_no_scopes(self):
+    def test_claim_with_no_scopes_no_names(self):
         Claim.objects.create(token=self.auth)
 
     def test_claim_add_scope_with_nonexistant_context(self):
