@@ -52,10 +52,6 @@ class DestroyTokenMixin(mixins.DestroyModelMixin):
         )
 
 
-class RefreshTokenMixin:
-    pass
-
-
 class ListTokensMixin(mixins.ListModelMixin):
     """
     List all the tokens for the user
