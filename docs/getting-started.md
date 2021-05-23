@@ -218,6 +218,13 @@ Because we're using viewsets instead of views, we can automatically generate the
 Again, if we need more control over the API URLs we can simply drop down to using regular class-based views, and writing the URL conf explicitly.
 
 
+## 6. Setup Super Users
+Before we get started, lets create a user, so we can test the application.
+```bash
+pipenv run ./manage.py createsuperuser --username superuser
+```
+This will prompt you for a password, after which you will have successfully create a superuser for this app.
+
 ## 5. The App So far
 
 Right! So let's take a break and check if everything is in order. So far, we have created models, serializes and views. We also modified the settings.py with necessary configs.
@@ -231,8 +238,6 @@ pipenv run ./manage.py runserver
 ```
 
 Make sure the server starts properly!
-
-## 6. Setup users
 
 ## 7. Setup auth with knoxth
 
