@@ -27,12 +27,6 @@ class IsScoped(BasePermission):
         auth_token = IsScoped.get_auth_token(request)
         if auth_token is None:
             return False
-        print(
-            ACCESS,
-            IsScoped.context,
-            auth_token.claim,
-            auth_token.claim.verify(IsScoped.context, ACCESS),
-        )
         return bool(
             auth_token
             and (
