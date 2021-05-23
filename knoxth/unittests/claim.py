@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.test import TestCase
 from knox.models import AuthToken as KnoxToken
+
 from knoxth import constants
 from knoxth.models import Claim, Context, Scope
 
@@ -15,6 +16,7 @@ class ClaimTestCase(TestCase):
         self.user = User.objects.create(username="ayush", email="meow@meow.com", password="meow")
 
         self.auth, self.token = KnoxToken.objects.create(user=self.user)
+        self.auth.claim.delete()
 
     def test_claim_with_no_token_or_scopes(self):
         with self.assertRaises(IntegrityError):
