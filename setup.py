@@ -20,7 +20,7 @@ setup(
     packages=find_packages(exclude=["knoxth_project", "test_app", "test_app.migrations"]),
     # Start with a small number and increase it with
     # every change you make https://semver.org
-    version="0.0.1",
+    version="0.0.3",
     # Chose a license from here: https: //
     # help.github.com / articles / licensing - a -
     # repository. For example: MIT
@@ -49,6 +49,10 @@ setup(
     # List of packages to install with this one
     install_requires=[
         "knox",
+        "djangorestframework",
+        "django>=2.2",
+        "jinja2",
+        "boto3",
     ],
     # https://pypi.org/classifiers/
     classifiers=[
